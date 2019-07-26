@@ -3,16 +3,34 @@ package calendar;
 public class Calendar {
 	
 	private final int[] MaxDays =  { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
-	public int maxDaysOfMonth(int month) {
-		return MaxDays[month-1];
+	private final int[] LeapMaxDays =  { 31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+	
+	public boolean isLeapYear(int year) {
+		if(year % 4 == 0 && (year % 100 != 0 || year % 400 == 0)) {
+			return true;
+		}
+		else {
+		return false;
+		}
+	}
+	
+	public int getmaxDaysOfMonth(int year, int month) {
+		
+		if(isLeapYear(year)) {
+			return LeapMaxDays[month-1];
+		}
+		else {
+			return MaxDays[month-1];
 				
+		}
 	}
 	public void printSampleCalendar(int year, int month) {
 		System.out.printf("      <<%d %d>>\n ", year, month);
 		System.out.println("SU MO TU WE TH FR SA");
 		System.out.println("---------------------");
 		Calendar cal = new Calendar();
-		int maxDay = cal.maxDaysOfMonth(month);
+		int maxDay = getmaxDaysOfMonth(year, month);
+		
 		for(int i = 1; i <= maxDay; i++) {
 			System.out.printf("%3d", i);
 			if(i % 7 == 0) {
@@ -23,6 +41,8 @@ public class Calendar {
 		
 		
 		
+
+
 //		System.out.println(" 1  2  3  4  5  6  7 ");
 //		System.out.println(" 8  9 10 11 12 13 14 ");
 //		System.out.println("15 16 17 18 19 20 21 ");
